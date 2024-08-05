@@ -12,4 +12,11 @@
     text-wrap: nowrap;
     cursor: pointer;
     scroll-snap-align: center;
+    &.active {
+        background: rgb(39, 137, 170);
+        color: #fff;
+    }
+    &:first-child {
+        margin-right: 0;
+    }
 }

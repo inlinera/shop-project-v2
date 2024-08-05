@@ -1,0 +1,16 @@
+@import '@/app/assets/styles/variables.scss';
+
+.list {
+    position: relative;
+    width: 96vw;
+    margin: 10px auto;
+    padding: 10px 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    text-align: center;
+    font-family: "Poppins", sans-serif;
+    justify-content: center;
+    align-items: center;
+    border-radius: 16px;
+    background-color: $prod_list-color;
+}

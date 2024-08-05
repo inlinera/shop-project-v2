@@ -1,0 +1,41 @@
+@import '@/app/assets/styles/variables.scss';
+
+.cart_item {
+    position: relative;
+    width: 90%;
+    height: 200px;
+    margin: 15px auto;
+    padding: 15px;
+    display: grid;
+    grid-template-columns: 220px 3fr 1fr 1fr;
+    border-radius: 16px;
+    background-color: $body-color;
+    img {
+        max-height: 175px;
+    }
+}
+
+@media(max-width: 1082px) {
+    .cart_item {
+        width: 70%;
+        height: 400px;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr 40px;
+        text-align: center;
+        * {
+            margin: auto;
+        }
+        img {
+            min-height: 240px;
+        }
+    }
+}
+
+@media (max-width: 396px) {
+    .cart_item {
+        width: 80%;
+        img {
+            max-height: 165px;
+        }
+    }
+}

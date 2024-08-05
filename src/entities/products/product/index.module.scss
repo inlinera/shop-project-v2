@@ -1,0 +1,104 @@
+@import '@/app/assets/styles/variables.scss';
+
+.product {
+    position: relative;
+    display: grid;
+    grid-template-rows: 180px auto;
+    grid-template-columns: 1fr;
+    align-items: center;
+    justify-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 400;
+    background-color: #fff;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all .5s;
+
+.product_image_preview {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    max-width: 100%;
+    max-height: 180px;
+    object-fit: cover;
+}
+
+.hearticon {
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    top: 0;
+    right: 0;
+    margin: 5px;
+    padding: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $prod_list-color;
+    border-radius: 100%;
+    z-index: 3;
+    transform: translateX(40px);
+    transition: all .3s;
+}
+
+.product_info {
+    display: grid;
+    line-height: 1.3;
+    grid-template-rows: 70px auto;
+    text-align: center;
+    p { 
+    margin: 0;
+    padding: 0;
+    }
+}
+
+.product_cart {
+    display: flex;
+    width: 100%;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    span {
+        margin: 0 10px 0 0;
+    }
+    button {
+        width: 100%;
+        height: 35px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        border: none;
+        border-radius: 3px;
+        font-size: 13px;
+        background-color: rgb(39, 137, 170);
+        cursor: pointer;
+        transition: all .2s;
+        span {
+            margin: 5px;
+        }
+    }
+}
+
+&:hover {
+    transform: scale(1.03);
+    transform: translateY(5px);
+    transition: all .5s;
+    .hearticon {
+        transform: translateX(0px);
+    }
+}
+@media(max-width: 965px) {
+    &:hover {
+        transform: scale(1);
+    transform: translateY(0);
+    }
+    .hearticon {
+        transform: translateX(0px);
+    }
+}
+}

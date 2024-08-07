@@ -8,6 +8,7 @@ import { TheProduct } from '@/entities/products/product/index'
 import { CircularProgress } from '@mui/material'
 
  export const ProductList = observer(() => {
+
     const { products, getProducts } = FetchProducts;
 
   useEffect(() => {
@@ -19,7 +20,10 @@ import { CircularProgress } from '@mui/material'
         <div className={`${cl.product_list_main} jcc aic`}>
         {
         products.length ? products.map(p => <TheProduct product={p} key={p.id}/>) 
-        : <CircularProgress className={`${cl.product_loader} jcc aic x-center`}/>
+        : <div className={`${cl.product_loader} jcc aic x-center`}>
+        <CircularProgress />
+        <p>Products not found or not loaded yet</p>
+        </div>
         }
         </div>
     </div>

@@ -1,12 +1,12 @@
 import { observer } from "mobx-react-lite"
 //MOBX
-import FetchProducts from '@/shared/store/products-api'
+import CartStore from '@/shared/store/cart-store'
 //COMPONENTS
-import { ListTemplate } from '@/shared/ui/listTemplate/index'
+import { ListTemplate } from '@/shared/ui/list/list/index'
 import { CartItem } from '@/entities/products/cart/index'
 
 export const CartList = observer(() => {
-    const { cart } = FetchProducts
+    const { cart } = CartStore
 
   return (
     <div>

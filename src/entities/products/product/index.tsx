@@ -2,7 +2,9 @@ import { FC, useCallback, useEffect, useState } from 'react'
 import cl from './index.module.scss'
 import { observer } from 'mobx-react-lite';
 //  MOBX AND TYPES
-import FetchProducts, { ProductItem } from '@/shared/store/products-api'
+import CartStore from '@/shared/store/cart-store'
+import FavoritesStore from '@/shared/store/favorites-store'
+import { ProductItem } from '@/shared/store/products-api'
 // ICONS
 import { CircularProgress } from '@mui/material';
 import { ShoppingBasket, Heart } from 'lucide-react';
@@ -14,7 +16,8 @@ interface TheProductProps {
 export const TheProduct: FC<TheProductProps> = observer(({ product }) => {
     const { pictures, price, name } = product;
 
-    const { cart, toggleCart, favorites, toggleFavorites } = FetchProducts
+    const { cart, toggleCart } = CartStore
+    const { favorites, toggleFavorites } = FavoritesStore
 
     const [isActive, setIsActive] = useState(false)
   

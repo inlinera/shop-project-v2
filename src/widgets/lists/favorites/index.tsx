@@ -1,13 +1,13 @@
 import { observer } from 'mobx-react-lite'
 //MOBX
-import FetchProducts from '@/shared/store/products-api'
+import FavoritesStore from '@/shared/store/favorites-store'
 //COMPONENTS
-import { ListTemplate } from '@/shared/ui/listTemplate/index'
+import { ListTemplate } from '@/shared/ui/list/list/index'
 import { FavoritesItem } from '@/entities/products/favorites/index'
 
 
 export const FavList = observer(() => {
-    const { favorites } = FetchProducts;
+    const { favorites } = FavoritesStore
 
   return (
     <div>

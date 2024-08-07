@@ -2,18 +2,20 @@ import React, { FC } from "react"
 import { observer } from "mobx-react-lite"
 import cl from './index.module.scss'
 //MOBX
-import FetchProducts from '@/shared/store/products-api'
+import TypeStore from '@/shared/store/sort/type/type-store'
 
 interface FilterItemProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode | React.ReactChild
-  typeInfo: string
+  typeInfo?: string
+  onModalClick?: () => void
 }
 
-export const FilterItemTemplate: FC<FilterItemProps> = observer(({ children, typeInfo, ...props }) => {
-  const { changeType, type } = FetchProducts
+export const FilterItemTemplate: FC<FilterItemProps> = observer(({ children, typeInfo, onModalClick, ...props }) => {
+  const { changeType, type } = TypeStore
 
   const handleClick = () => {
-      changeType(typeInfo)
+    if (typeInfo) changeType(typeInfo)
+      if (onModalClick) onModalClick()
   }
   
   return (

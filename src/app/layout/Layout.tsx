@@ -1,14 +1,15 @@
 import {Link} from 'react-router-dom'
 import cl from './Layout.module.scss'
 //MOBX
-import FetchProducts from '@/shared/store/products-api'
+import CartStore from '@/shared/store/cart-store'
+import FavoritesStore from '@/shared/store/favorites-store'
 //ICONS
 import { ShoppingCart, Heart } from 'lucide-react';
 import { observer } from 'mobx-react-lite';
 
 export const Layout = observer(() => {
-  const { cart, favorites } = FetchProducts
-  
+  const { cart } = CartStore
+  const { favorites } = FavoritesStore
 
   return (
     <nav className={`${cl.layout_navbar} aic`}>
@@ -16,7 +17,7 @@ export const Layout = observer(() => {
       <div className={cl.layout_navbar__links}>
       <Link to='/cart'>
         <button>
-          <ShoppingCart size={'21px'}/>
+          <ShoppingCart size={'20px'}/>
       <span>
         {cart.length}
       </span>
@@ -24,7 +25,7 @@ export const Layout = observer(() => {
     </Link>
         <Link to='/favorites'>
         <button>
-        <Heart size={'21px'}/>
+        <Heart size={'20px'}/>
         <span>
         {favorites.length}
       </span>

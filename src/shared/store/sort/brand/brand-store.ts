@@ -13,12 +13,9 @@ class BrandStore {
     }
 
     sortBrand = (brand: string) => {
-        if (this.selectedBrands.includes(brand)) {
-            this.selectedBrands = this.selectedBrands.filter(b => b !== brand)
-        }
-        else {
-            this.selectedBrands.push(brand)
-        }
+        this.selectedBrands = this.selectedBrands.includes(brand) 
+           ? this.selectedBrands.filter(b => b !== brand) 
+            : [...this.selectedBrands, brand]
         FetchProducts.products = FetchProducts.filterProducts.filter(p => this.selectedBrands.includes(p.brand))
         ApplyFilters.applyFilters()
       }

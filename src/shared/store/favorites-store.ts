@@ -1,17 +1,17 @@
 import { makeAutoObservable, runInAction } from 'mobx'
 import ToggleItem from './item-store'
-import { ProductItem } from './products-api'
+import { IProduct } from '../interfaces/IProduct'
 
 class FavoritesStore {
-    favorites:ProductItem[] = []
+    favorites: IProduct[] = []
 
     constructor() {
         const storedFavs = localStorage.getItem('favorites')
-        this.favorites = storedFavs? JSON.parse(storedFavs) : []
+        this.favorites = storedFavs ? JSON.parse(storedFavs) : []
         makeAutoObservable(this)
     }
 
-    toggleFavorites = (product: ProductItem) => {
+    toggleFavorites = (product: IProduct) => {
         runInAction(() => {
           ToggleItem.toggleItem(product, this.favorites)
         localStorage.setItem('favorites', JSON.stringify(this.favorites))

@@ -1,16 +1,17 @@
 import { FC, useCallback, useEffect, useState } from 'react'
 import cl from './index.module.scss'
 import { observer } from 'mobx-react-lite';
-//  MOBX AND TYPES
+//  MOBX
 import CartStore from '@/shared/store/cart-store'
 import FavoritesStore from '@/shared/store/favorites-store'
-import { ProductItem } from '@/shared/store/products-api'
+//INTERFACE
+import { IProduct } from '@/shared/interfaces/IProduct';
 // ICONS
 import { CircularProgress } from '@mui/material';
 import { ShoppingBasket, Heart } from 'lucide-react';
 
 interface TheProductProps {
-    product: ProductItem
+    product: IProduct
 }
 
 export const TheProduct: FC<TheProductProps> = observer(({ product }) => {
@@ -43,7 +44,7 @@ export const TheProduct: FC<TheProductProps> = observer(({ product }) => {
       setCurrentImage(pictures && pictures[0]);
     }, [pictures]);
 
-    const toggleClassBtn = (product: ProductItem) => {
+    const toggleClassBtn = (product: IProduct) => {
       toggleFavorites(product)
     }
 

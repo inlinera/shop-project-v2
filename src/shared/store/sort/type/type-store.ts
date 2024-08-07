@@ -4,6 +4,7 @@ import ApplyFilters from '../applyAllFilters'
 
 class TypeStore {
 
+    defaultType = 'All Products'
     type = ''
 
     constructor() {
@@ -13,13 +14,10 @@ class TypeStore {
     changeType = (type: string) => {
         runInAction(() => {
           this.type = type;
-          if (type !== 'All Products') {
             FetchProducts.products = FetchProducts.filterProducts.filter(
-              p => p.type.toLocaleLowerCase() === type.toLocaleLowerCase()
-            )
-          } else {
-            FetchProducts.products = FetchProducts.filterProducts.filter(p => p)
-          }
+              this.type.toLowerCase() !== this.defaultType.toLowerCase() 
+              ? p => p.type.toLowerCase() === type.toLowerCase()
+              : p => p )
           ApplyFilters.applyFilters()
         })
       }

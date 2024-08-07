@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx'
-import { ProductItem } from './products-api'
+import { IProduct } from '../interfaces/IProduct'
 
 class ToggleItem {
 
@@ -7,7 +7,7 @@ class ToggleItem {
         makeAutoObservable(this)
     }
 
-    toggleItem = (item: ProductItem, array: ProductItem[]) => {
+    toggleItem = (item: IProduct, array: IProduct[]) => {
         const index = array.findIndex(i => i.id === item.id)
         if (index !== -1) {
           array.splice(index, 1)

@@ -1,17 +1,17 @@
 import { makeAutoObservable, runInAction } from 'mobx'
 import ToggleItem from './item-store'
-import { ProductItem } from './products-api'
+import { IProduct } from '../interfaces/IProduct'
 
 class CartStore {
-    cart: ProductItem[] = []
+    cart: IProduct[] = []
 
     constructor() {
         const storedCart = localStorage.getItem('cart')
-        this.cart = storedCart? JSON.parse(storedCart) : []
+        this.cart = storedCart ? JSON.parse(storedCart) : []
         makeAutoObservable(this)
     }
 
-    toggleCart = (product: ProductItem) => {
+    toggleCart = (product: IProduct) => {
         runInAction(() => {
           ToggleItem.toggleItem(product, this.cart)
         localStorage.setItem('cart', JSON.stringify(this.cart))

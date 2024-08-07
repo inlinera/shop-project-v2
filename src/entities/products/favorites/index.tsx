@@ -1,13 +1,14 @@
 import { FC } from "react"
 import { observer } from 'mobx-react-lite'
-//MOBX AND TYPE
+//MOBX
 import FavoritesStore from '@/shared/store/favorites-store'
-import { ProductItem } from '@/shared/store/products-api'
+//INTERFACE
+import { IProduct } from "@/shared/interfaces/IProduct"
 //COMPONENTS
 import { ItemTemplate } from '@/shared/ui/list/item'
 
 interface FavItemProps {
-    item: ProductItem
+    item: IProduct
 }
 
 export const FavoritesItem: FC<FavItemProps> = observer(({ item }) => {

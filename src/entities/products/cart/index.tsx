@@ -1,13 +1,14 @@
 import { FC } from 'react'
 import { observer } from 'mobx-react-lite'
-//MOBX AND TYPE
+//MOBX
 import CartStore from '@/shared/store/cart-store'
-import { ProductItem } from '@/shared/store/products-api'
+//INTERFACE
+import { IProduct } from '@/shared/interfaces/IProduct'
 //COMPONENTS
 import { ItemTemplate } from '@/shared/ui/list/item'
 
 interface CartItemProps {
-    item: ProductItem
+    item: IProduct
 }
 
 export const CartItem: FC<CartItemProps> = observer(({ item }) => {

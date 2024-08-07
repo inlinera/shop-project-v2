@@ -9,8 +9,9 @@ import { Filter } from '@/widgets/filter/index'
 export const Products = () => {
 
   useEffect(() => {
-    TypeStore.changeType('All Products')
+    TypeStore.changeType(TypeStore.defaultType)
   }, [])
+
   return  (
     <>
     <Filter />

@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useCallback } from 'react'
 import { observer } from 'mobx-react-lite'
 //MOBX
 import CartStore from '@/shared/store/cart-store'
@@ -14,13 +14,15 @@ interface CartItemProps {
 export const CartItem: FC<CartItemProps> = observer(({ item }) => {
 
   const { toggleCart } = CartStore
-  
+
+  const hadleClick = useCallback(() => toggleCart(item), [item])
+
   return (
     <ItemTemplate>
       <img src={item.pictures[0]} alt="product" />
       <p>{item.name}</p>
       <span>{item.price}</span>
-      <button onClick={() => toggleCart(item)}>Delete</button>
+      <button onClick={hadleClick}>Delete</button>
     </ItemTemplate>
-  );
+  )
 })

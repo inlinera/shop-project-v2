@@ -1,13 +1,17 @@
+import React from 'react'
 import { Link } from "react-router-dom"
 //COMPONENTS
-import { FavList } from '@/widgets/lists/favorites/index'
+import { CircularProgress } from '@mui/material'
+const List = React.lazy(() => import('@/widgets/lists/favorites/index'))
 
 export const Favorites = () => {
 
   return (
     <div className="cb">
         <Link to='/'>Back</Link>
-       <FavList />
+        <React.Suspense fallback={<CircularProgress color="secondary"/>}>
+        <List />
+        </React.Suspense>
     </div>
   )
 }

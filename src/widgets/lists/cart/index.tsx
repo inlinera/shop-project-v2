@@ -5,14 +5,16 @@ import CartStore from '@/shared/store/cart-store'
 import { ListTemplate } from '@/shared/ui/list/list/index'
 import { CartItem } from '@/entities/products/cart/index'
 
-export const CartList = observer(() => {
+const CartList = observer(() => {
     const { cart } = CartStore
-
   return (
     <div>
       <ListTemplate>
+        {!cart.length && 'Items not found'}
       {cart?.map(e => <CartItem item={e} key={e.id}/>)}
       </ListTemplate>
     </div>
   )
 })
+
+export default CartList

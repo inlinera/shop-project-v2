@@ -22,13 +22,13 @@ export const TheProduct: FC<TheProductProps> = observer(({ product }) => {
 
     const [isActive, setIsActive] = useState(false)
   
-    const [currentImage, setCurrentImage] = useState(pictures && pictures[0]);
+    const [currentImage, setCurrentImage] = useState(pictures?.[0]);
     const [isLoading, setIsLoading] = useState(true);
   
     const handleImageLoad = useCallback(() => setIsLoading(false), []);
   
     const handleMouseEnter = useCallback(() => {
-      if (pictures && pictures.length > 1) {
+      if (pictures?.length > 1) {
         setIsLoading(true);
         const img = new Image();
         img.src = pictures[1];
@@ -41,7 +41,7 @@ export const TheProduct: FC<TheProductProps> = observer(({ product }) => {
   
     const handleMouseLeave = useCallback(() => {
       setIsLoading(false);
-      setCurrentImage(pictures && pictures[0]);
+      setCurrentImage(pictures?.[0]);
     }, [pictures]);
 
     const toggleClassBtn = (product: IProduct) => {
@@ -64,7 +64,7 @@ export const TheProduct: FC<TheProductProps> = observer(({ product }) => {
           </button>
           <img src={currentImage} onLoad={handleImageLoad}
             onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}
-            className={cl.product_image_preview} alt={name} />
+            className={cl.product_image_preview} loading='lazy' alt={name} />
         </div>
         <div className={cl.product_info}>
           <p>{name}</p>

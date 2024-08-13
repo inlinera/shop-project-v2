@@ -4,7 +4,7 @@ import { makeAutoObservable, runInAction } from 'mobx'
 import BrandStore from './sort/brand/brand-store'
 import { IProduct } from '../interfaces/IProduct'
 
-const API_URL = 'https://66ad1128f009b9d5c73449cd.mockapi.io/api/v1/products'
+const API_URL = 'https://e646a0ef033b0e33.mokky.dev/products'
 
 class FetchProducts {
 
@@ -25,8 +25,8 @@ class FetchProducts {
           BrandStore.selectedBrands = BrandStore.brands
         })
       }
-      catch(e) {
-        console.error(e)
+      catch (e) {
+        alert(`Error ${e}`)
       }
     }
   }

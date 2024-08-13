@@ -1,0 +1,32 @@
+@import '@/app/assets/styles/variables.scss';
+
+.product_item {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    .product_item__imgs {
+        width: min-content;
+        display: grid;
+        button {
+            margin: 5px;
+            padding: 10px;
+            background-color: $prod-list_color;
+            img {
+                max-height: 100px;
+            }
+        }
+    }
+    .product_item__info {
+        padding: 10px;
+        div {
+            margin: 20px;
+            h3 {
+                margin: 5px 0;
+                font-size: 18px;
+            }
+        }
+    }
+    .product_item__cart {
+        padding: 15px 25px;
+        background-color: $prod-list_color;
+    }
+}

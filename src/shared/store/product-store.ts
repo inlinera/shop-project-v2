@@ -24,7 +24,6 @@ class ProductStore {
       const { data } = await axios.get(`https://e646a0ef033b0e33.mokky.dev/products/${id}`)
       runInAction(() => {
         this.product = data
-        console.log(data)
         this.isLoading = false
       })
     } catch (err: any) {

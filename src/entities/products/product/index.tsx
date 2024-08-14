@@ -1,48 +1,57 @@
 import { FC, useCallback, useEffect, useState } from 'react'
 import cl from './index.module.scss'
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react-lite'
 //  MOBX
 import CartStore from '@/shared/store/cart-store'
 import FavoritesStore from '@/shared/store/favorites-store'
 //INTERFACE
-import { IProduct } from '@/shared/interfaces/IProduct';
+import { IProduct } from '@/shared/interfaces/IProduct'
+//COMPONENTS
+import { ProdButton } from '@/shared/ui/product-button'
 // ICONS
-import { CircularProgress } from '@mui/material';
-import { ShoppingBasket, Heart } from 'lucide-react';
+import { CircularProgress } from '@mui/material'
+import { ShoppingBasket, Heart } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
 
 interface TheProductProps {
     product: IProduct
 }
 
 export const TheProduct: FC<TheProductProps> = observer(({ product }) => {
-    const { pictures, price, name } = product;
+    const { pictures, price, name, id } = product
 
     const { cart, toggleCart } = CartStore
     const { favorites, toggleFavorites } = FavoritesStore
 
-    const [isActive, setIsActive] = useState(false)
+    const [isActive, setIsActive] = useState<boolean>(false)
   
-    const [currentImage, setCurrentImage] = useState(pictures?.[0]);
-    const [isLoading, setIsLoading] = useState(true);
+    const [currentImage, setCurrentImage] = useState<string>(pictures?.[0])
+    const [isLoading, setIsLoading] = useState<boolean>(true)
+
+    const navigate = useNavigate()
   
-    const handleImageLoad = useCallback(() => setIsLoading(false), []);
+    const handleImageLoad = useCallback(() => setIsLoading(false), [])
   
     const handleMouseEnter = useCallback(() => {
       if (pictures?.length > 1) {
-        setIsLoading(true);
-        const img = new Image();
-        img.src = pictures[1];
+        setIsLoading(true)
+        const img = new Image()
+        img.src = pictures[1]
         img.onload = () => {
-          setCurrentImage(pictures[1]);
-          setIsLoading(false);
-        };
+          setCurrentImage(pictures[1])
+          setIsLoading(false)
+        }
       }
-    }, [pictures]);
+    }, [pictures])
   
     const handleMouseLeave = useCallback(() => {
       setIsLoading(false);
-      setCurrentImage(pictures?.[0]);
-    }, [pictures]);
+      setCurrentImage(pictures?.[0])
+    }, [pictures])
+
+    const handleClick = () => {
+     navigate(`/product/${id}`)
+    }
 
     const toggleClassBtn = (product: IProduct) => {
       toggleFavorites(product)
@@ -64,19 +73,20 @@ export const TheProduct: FC<TheProductProps> = observer(({ product }) => {
           </button>
           <img src={currentImage} onLoad={handleImageLoad}
             onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}
-            className={cl.product_image_preview} loading='lazy' alt={name} />
+            className={cl.product_image_preview} onClick={handleClick}
+            loading='lazy' alt={name} />
         </div>
-        <div className={cl.product_info}>
+        <div className={cl.product_info} onClick={handleClick}>
           <p>{name}</p>
         </div>
         <div className={`${cl.product_cart} aic jcc`}>
         <span>{price}$</span>
-          <button onClick={() => toggleCart(product)}>
+          <ProdButton onClick={() => toggleCart(product)}>
             <ShoppingBasket size={'23px'} />
             <span>
               { isExistsCart ? 'Remove from' : 'Add to' } cart
               </span>
-          </button>
+          </ProdButton>
         </div>
       </div>
     );

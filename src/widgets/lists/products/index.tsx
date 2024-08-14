@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+
 import { observer } from 'mobx-react-lite'
 import cl from './index.module.scss'
 //MOBX
@@ -6,14 +6,15 @@ import FetchProducts from '@/shared/store/products-api'
 //COMPONENTS
 import { TheProduct } from '@/entities/products/product/index'
 import { CircularProgress } from '@mui/material'
+import { useEffect } from 'react'
 
  export const ProductList = observer(() => {
 
     const { products, getProducts } = FetchProducts;
 
-  useEffect(() => {
-    getProducts()
-  }, [])
+    useEffect(() => {
+      getProducts()
+    },[])
 
   return (
     <div className={cl.product_list}>

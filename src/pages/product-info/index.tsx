@@ -13,7 +13,7 @@ export const ProductPage = observer(() => {
     const { id } = useParams()
     const { product, fetchProduct, isLoading, error } = ProductStore
     const { cart, toggleCart } = CartStore
-    const [imgId, setImgId] = useState<number>(0)
+    const [ imgId, setImgId ] = useState<number>(0)
 
     useEffect(() => {
         if (id !== undefined) fetchProduct(Number(id))

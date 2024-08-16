@@ -9,7 +9,7 @@ import { Filter } from '@/widgets/filter/index'
 export const Products = () => {
 
   useEffect(() => {
-    TypeStore.changeType(TypeStore.defaultType)
+    TypeStore.changeType(TypeStore.chosedType)
   }, [])
 
   return  (

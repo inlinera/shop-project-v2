@@ -1,24 +1,51 @@
-import { makeAutoObservable } from 'mobx'
+import { makeAutoObservable, runInAction } from 'mobx'
 //
-import FetchProducts from '../../products-api'
-import ApplyFilters from '../applyAllFilters'
+import FetchProducts from '@/shared/store/products-api'
+import axios from 'axios'
+
+const API_URL = 'https://e646a0ef033b0e33.mokky.dev/brands'
+
+interface BrandItem {
+    brand: string
+}
+
 
 class BrandStore {
 
     brands: string[] = []
     selectedBrands: string[] = []
-
+    API_PAR = ''
+  
     constructor() {
-        makeAutoObservable(this)
+      makeAutoObservable(this)
+      this.getBrands()
     }
-
-    sortBrand = (brand: string) => {
-        this.selectedBrands = this.selectedBrands.includes(brand) 
-           ? this.selectedBrands.filter(b => b !== brand) 
-            : [...this.selectedBrands, brand]
-        FetchProducts.products = FetchProducts.filterProducts.filter(p => this.selectedBrands.includes(p.brand))
-        ApplyFilters.applyFilters()
+  
+    getBrands = async () => {
+        try {
+          const { data } = await axios.get(API_URL)
+          runInAction(() => {
+            this.brands = data.map((item: BrandItem) => item.brand)
+            this.selectedBrands = this.brands
+          })
+        } catch (e) {
+          alert(`Error ${e}`)
+        }
       }
-}
+  
+    sortBrand = (brand: string) => {
+      this.selectedBrands = this.selectedBrands.includes(brand) 
+      ? this.selectedBrands.filter(b => b != brand) 
+          : [...this.selectedBrands, brand]
+      if (this.selectedBrands.length === this.brands.length) {
+        this.API_PAR = ''
+      }
+      else {
+        this.API_PAR = this.selectedBrands.map(b => `&brand[]=${b}`).join('')
+      }
+      if (!FetchProducts.loading) FetchProducts.getProducts()
+    }
+  
+  }
 
 export default new BrandStore()

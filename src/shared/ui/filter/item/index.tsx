@@ -11,7 +11,7 @@ interface FilterItemProps extends React.ButtonHTMLAttributes<HTMLButtonElement> 
 }
 
 export const FilterItemTemplate: FC<FilterItemProps> = observer(({ children, typeInfo, onModalClick, ...props }) => {
-  const { changeType, type } = TypeStore
+  const { changeType, chosedType } = TypeStore
 
   const handleClick = () => {
     if (typeInfo) changeType(typeInfo)
@@ -19,7 +19,7 @@ export const FilterItemTemplate: FC<FilterItemProps> = observer(({ children, typ
   }
   
   return (
-    <button {...props} className={`${cl.btnSort} ${type === typeInfo && cl.active }`} onClick={handleClick}>
+    <button {...props} className={`${cl.btnSort} ${chosedType === typeInfo && cl.active }`} onClick={handleClick}>
       {children}
     </button>
   )

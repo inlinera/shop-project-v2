@@ -33,8 +33,8 @@ export const Sort = observer(() => {
         )
         }
         <h2>Sort by price</h2>
-        {prices.map(p => <FilterCheckbox type='radio' key={p.name} checked={priceType === p.name}
-        onChange={() => sortPrice(p.name)} >
+        {prices.map(p => <FilterCheckbox type='radio' key={p.name} checked={true}
+        onChange={() => sortPrice(p.sort)} >
           <span>{p.name}</span>
           </FilterCheckbox>)}
       </FilterModal>

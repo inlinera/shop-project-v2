@@ -2,33 +2,38 @@ import axios from 'axios'
 import { makeAutoObservable, runInAction } from 'mobx'
 //
 import BrandStore from './sort/brand/brand-store'
+import TypeStore from './sort/type/type-store'
 import { IProduct } from '../interfaces/IProduct'
 
-const API_URL = 'https://e646a0ef033b0e33.mokky.dev/products'
 
 class FetchProducts {
 
-    products: IProduct[] = []
-    filterProducts: IProduct[] = []
-
-    constructor() {
-        makeAutoObservable(this)
+  products: IProduct[] = []
+  loading = false
+  API_URL = 'https://e646a0ef033b0e33.mokky.dev/products?'
+  API_PARAMS = ''
+  
+  constructor() {
+      makeAutoObservable(this)
+  }
+  
+  getProducts = async () => {
+    try {
+      this.loading = true
+      this.API_PARAMS = TypeStore.API_PAR + BrandStore.API_PAR
+      const url = this.API_URL + this.API_PARAMS
+      const { data } = await axios.get<IProduct[]>(url)
+      runInAction(() => {
+        this.products = data
+        this.loading = false
+      })
     }
-
-    getProducts = async () => {
-      try {
-        const { data } = await axios.get<IProduct[]>(API_URL)
-        runInAction(() => {
-          this.products = data
-          this.filterProducts = data
-          BrandStore.brands = [...new Set(data.map(p => p.brand))]
-          BrandStore.selectedBrands = BrandStore.brands
-        })
-      }
-      catch (e) {
-        alert(`Error ${e}`)
-      }
+    catch (e) {
+      this.loading = false
+      alert(`Error ${e}`)
     }
   }
-
-export default new FetchProducts()
+  
+  }
+  
+  export default new FetchProducts()

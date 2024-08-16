@@ -1,6 +1,8 @@
 import { makeAutoObservable } from 'mobx'
 //MOBX
-import ApplyFilters from '../applyAllFilters'
+import FetchProducts from '@/shared/store/products-api'
+
+//ДОДЕЛАТЬ СОРТИРОВКУ ПО ЦЕНЕ
 
 class PriceStore {
 
@@ -11,9 +13,7 @@ class PriceStore {
     }
 
     sortPrice = (chosedPrice: string) => {
-        this.priceType = chosedPrice
-        
-        ApplyFilters.applyFilters()
+
       }
 }
 

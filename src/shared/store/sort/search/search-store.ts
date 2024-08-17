@@ -2,19 +2,16 @@ import { makeAutoObservable } from 'mobx'
 //MOBX
 import FetchProducts from '../../products-api'
 
-
-//ДОДЕЛАТЬ ПОИСК
-
 class SearchStore {
-  searchQuery = ''
+  API_PAR = ''
 
   constructor() {
     makeAutoObservable(this)
   }
 
   sortSearch = (query: string) => {
-    this.searchQuery = query
-    console.log(query)
+    this.API_PAR = `&name=*${query}`
+    FetchProducts.getProducts()
   }
 }
 

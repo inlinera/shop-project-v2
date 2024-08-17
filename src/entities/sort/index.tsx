@@ -18,7 +18,7 @@ export const Sort = observer(() => {
   const [isModalActive, setIsModalActive] = useState(false)
 
   const { brands, selectedBrands, sortBrand } = BrandStore
-  const { priceType, sortPrice } = PriceStore
+  const { sortPrice, priceType } = PriceStore
 
   return (
     <div>
@@ -33,7 +33,7 @@ export const Sort = observer(() => {
         )
         }
         <h2>Sort by price</h2>
-        {prices.map(p => <FilterCheckbox type='radio' key={p.name} checked={true}
+        {prices.map(p => <FilterCheckbox type='radio' key={p.name} checked={priceType === p.sort}
         onChange={() => sortPrice(p.sort)} >
           <span>{p.name}</span>
           </FilterCheckbox>)}

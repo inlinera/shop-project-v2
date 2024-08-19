@@ -1,4 +1,3 @@
-
 import { observer } from 'mobx-react-lite'
 import cl from './index.module.scss'
 //MOBX
@@ -9,7 +8,7 @@ import { CircularProgress } from '@mui/material'
 
  export const ProductList = observer(() => {
 
-    const { products, loading } = FetchProducts;
+    const { products, loading } = FetchProducts
   return (
     loading ? (
     <div className="jcc"><CircularProgress /></div>
@@ -21,8 +20,7 @@ import { CircularProgress } from '@mui/material'
           {
           products.length ? products.map(p => <TheProduct product={p} key={p.id}/>) 
           : <div className={`${cl.product_loader} jcc aic x-center`}>
-          <CircularProgress />
-          <p>Products not found or not loaded yet</p>
+          <p>Products not found</p>
           </div>
           }
           </div>

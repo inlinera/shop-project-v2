@@ -6,7 +6,7 @@ class FavoritesStore {
     favorites: IProduct[] = []
 
     constructor() {
-        const storedFavs = localStorage.getItem('favorites')
+        const storedFavs = localStorage.getItem('favorites-inl')
         this.favorites = storedFavs ? JSON.parse(storedFavs) : []
         makeAutoObservable(this)
     }
@@ -14,7 +14,7 @@ class FavoritesStore {
     toggleFavorites = (product: IProduct) => {
         runInAction(() => {
           ToggleItem.toggleItem(product, this.favorites)
-        localStorage.setItem('favorites', JSON.stringify(this.favorites))
+        localStorage.setItem('favorites-inl', JSON.stringify(this.favorites))
         })
       }
 }

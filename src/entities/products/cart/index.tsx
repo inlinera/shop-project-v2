@@ -6,6 +6,8 @@ import CartStore from '@/shared/store/cart-store'
 import { IProduct } from '@/shared/interfaces/IProduct'
 //COMPONENTS
 import { ItemTemplate } from '@/shared/ui/list/item'
+//HOOKS
+import { useNav } from '@/shared/hooks/useNav'
 
 interface CartItemProps {
     item: IProduct
@@ -17,10 +19,13 @@ export const CartItem: FC<CartItemProps> = observer(({ item }) => {
 
   const hadleClick = useCallback(() => toggleCart(item), [item])
 
+  const useNavigationFunction = useNav()
+
+
   return (
     <ItemTemplate>
-      <img src={item.pictures[0]} alt="product" />
-      <p>{item.name}</p>
+      <img src={item.pictures[0]} alt="product" onClick={() => useNavigationFunction(item.id)}/>
+      <p onClick={() => useNavigationFunction(item.id)}>{item.name}</p>
       <span>{item.price}</span>
       <button onClick={hadleClick}>Delete</button>
     </ItemTemplate>

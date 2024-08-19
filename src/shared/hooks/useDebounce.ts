@@ -4,7 +4,7 @@ export const useDebounce = (callback: (value: string) => void, delay: number) =>
   const debounceTimeout = useRef<number | null>(null)
 
   const debouncedCallback = useCallback((value: string) => {
-    if (debounceTimeout.current!== null) {
+    if (debounceTimeout.current !== null) {
       clearTimeout(debounceTimeout.current)
     }
     debounceTimeout.current = setTimeout(() => {
@@ -13,4 +13,4 @@ export const useDebounce = (callback: (value: string) => void, delay: number) =>
   }, [callback, delay])
 
   return debouncedCallback
-};
+}

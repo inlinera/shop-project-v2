@@ -10,7 +10,7 @@ class SearchStore {
   }
 
   sortSearch = (query: string) => {
-    this.API_PAR = `&name=*${query}`
+    this.API_PAR = query ? `&name=*${query}` : ''
     FetchProducts.getProducts()
   }
 }

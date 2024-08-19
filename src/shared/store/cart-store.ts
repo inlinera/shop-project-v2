@@ -6,7 +6,7 @@ class CartStore {
     cart: IProduct[] = []
 
     constructor() {
-        const storedCart = localStorage.getItem('cart')
+        const storedCart = localStorage.getItem('cart-inl')
         this.cart = storedCart ? JSON.parse(storedCart) : []
         makeAutoObservable(this)
     }
@@ -14,7 +14,7 @@ class CartStore {
     toggleCart = (product: IProduct) => {
         runInAction(() => {
           ToggleItem.toggleItem(product, this.cart)
-        localStorage.setItem('cart', JSON.stringify(this.cart))
+        localStorage.setItem('cart-inl', JSON.stringify(this.cart))
         })
       }
 }

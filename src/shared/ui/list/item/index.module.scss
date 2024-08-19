@@ -7,11 +7,16 @@
     margin: 15px auto;
     padding: 15px;
     display: grid;
-    grid-template-columns: 220px 3fr 1fr 1fr;
+    grid-template-columns: 210px 3fr 1fr 1fr;
     border-radius: 16px;
     background-color: $body-color;
+    text-align: left;
     img {
-        max-height: 175px;
+        max-height: 145px;
+        cursor: pointer;
+    }
+    p {
+        cursor: pointer;
     }
 }
 

@@ -11,7 +11,8 @@ import { ProdButton } from '@/shared/ui/product-button'
 // ICONS
 import { CircularProgress } from '@mui/material'
 import { ShoppingBasket, Heart } from 'lucide-react'
-import { useNavigate } from 'react-router-dom'
+//HOOKS
+import { useNav } from '@/shared/hooks/useNav'
 
 interface TheProductProps {
     product: IProduct
@@ -27,8 +28,6 @@ export const TheProduct: FC<TheProductProps> = observer(({ product }) => {
   
     const [currentImage, setCurrentImage] = useState<string>(pictures?.[0])
     const [isLoading, setIsLoading] = useState<boolean>(true)
-
-    const navigate = useNavigate()
   
     const handleImageLoad = useCallback(() => setIsLoading(false), [])
   
@@ -49,16 +48,14 @@ export const TheProduct: FC<TheProductProps> = observer(({ product }) => {
       setCurrentImage(pictures?.[0])
     }, [pictures])
 
-    const handleClick = () => {
-     navigate(`/product/${id}`)
-    }
-
     const toggleClassBtn = (product: IProduct) => {
       toggleFavorites(product)
     }
 
     const isExistsCart = cart.some(p => p.id === product.id)
     const isExistsFavs = favorites.some(p => p.id === product.id)
+
+    const useNavigationFunction = useNav()
 
     useEffect(() => {
       setIsActive(prevState => prevState !== isExistsFavs ? isExistsFavs : prevState)
@@ -73,10 +70,10 @@ export const TheProduct: FC<TheProductProps> = observer(({ product }) => {
           </button>
           <img src={currentImage} onLoad={handleImageLoad}
             onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}
-            className={cl.product_image_preview} onClick={handleClick}
+            className={cl.product_image_preview} onClick={() => useNavigationFunction(id)}
             loading='lazy' alt={name} />
         </div>
-        <div className={cl.product_info} onClick={handleClick}>
+        <div className={cl.product_info} onClick={() => useNavigationFunction(id)}>
           <p>{name}</p>
         </div>
         <div className={`${cl.product_cart} aic jcc`}>

@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom'
 //COMPONENTS
-import { Layout } from '@/app/layout/Layout'
+import { Layout } from '@/widgets/layout/Layout'
 import { Products } from '@/pages/products/index'
 import { Cart } from '@/pages/cart/index'
 import { Favorites } from '@/pages/favorites/index'

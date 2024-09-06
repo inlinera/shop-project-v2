@@ -1,6 +1,6 @@
 import { makeAutoObservable, runInAction } from 'mobx'
 import axios from 'axios';
-import { IProduct } from '../interfaces/IProduct';
+import { IProduct } from '../interfaces/IProduct'
 
 class ProductStore {
   product: IProduct = {

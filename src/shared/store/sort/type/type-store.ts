@@ -1,4 +1,4 @@
-import { makeAutoObservable, runInAction } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx"
 import FetchProducts from '../../products-api'
 
 class TypeStore {
@@ -8,7 +8,9 @@ class TypeStore {
     API_PAR = ''
 
     constructor() {
-        makeAutoObservable(this)
+        makeAutoObservable(this, {
+          defaultType: false
+        })
     }
 
     changeType = (type: string) => {

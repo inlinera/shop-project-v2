@@ -1,6 +1,4 @@
 import { makeAutoObservable } from 'mobx'
-//MOBX
-import FetchProducts from '@/shared/store/products-api'
 
 class PriceStore {
 
@@ -14,8 +12,7 @@ class PriceStore {
     sortPrice = (chosedPrice: string) => {
         this.priceType = chosedPrice
         this.API_PAR = `&sortBy=${chosedPrice}`
-        FetchProducts.getProducts()
-      }
+    }
 }
 
 export default new PriceStore()

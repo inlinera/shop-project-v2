@@ -4,19 +4,32 @@ import cl from './index.module.scss'
 import SearchStore from '@/shared/store/sort/search/search-store'
 //HOOKS
 import { useDebounce } from "@/shared/hooks/useDebounce"
+import { observer } from "mobx-react-lite"
 
 interface SearchTemplateProps {
     placeholder: string
 }
 
-export const SearchTemplate: FC<SearchTemplateProps> = ({ placeholder }) => {
+export const SearchTemplate: FC<SearchTemplateProps> = observer(({ placeholder }) => {
 
-  const debouncedSearch = useDebounce((value: string) => {
-    SearchStore.sortSearch(value)
+  const { value, sortSearch, setValue } = SearchStore
+
+  const debouncedSearch = useDebounce((query: string) => { 
+    sortSearch(query)
   }, 1000)
 
-  return (
-    <input type="text" placeholder={placeholder} 
-    onChange={(e) => debouncedSearch(e.target.value)} className={cl.inputSearch}/>
-  )
-}
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => { 
+    setValue(e.target.value)
+    debouncedSearch(value)
+  }
+
+    return ( 
+        <input 
+            type="text" 
+            placeholder={placeholder} 
+            value={value} 
+            onChange={handleChange} 
+            className={cl.inputSearch} 
+        /> 
+    )
+})

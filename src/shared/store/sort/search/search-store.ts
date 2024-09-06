@@ -1,18 +1,20 @@
-import { makeAutoObservable } from 'mobx'
-//MOBX
-import FetchProducts from '../../products-api'
+import { makeAutoObservable, runInAction } from 'mobx'
 
 class SearchStore {
   API_PAR = ''
+  value = ''
 
   constructor() {
     makeAutoObservable(this)
   }
 
   sortSearch = (query: string) => {
-    this.API_PAR = query ? `&name=*${query}` : ''
-    FetchProducts.getProducts()
+    runInAction(() => {
+      this.API_PAR = this.value ? `&name=*${query}` : ''
+    })
   }
+
+  setValue = (value: string) => this.value = value
 }
 
 export default new SearchStore()

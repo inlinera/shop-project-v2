@@ -1,5 +1,4 @@
 import { makeAutoObservable, runInAction } from "mobx"
-import FetchProducts from '../../products-api'
 
 class TypeStore {
 
@@ -21,7 +20,6 @@ class TypeStore {
         } else {
           this.API_PAR = `&type=${type}`
         }
-        FetchProducts.getProducts()
       })
     }
 }

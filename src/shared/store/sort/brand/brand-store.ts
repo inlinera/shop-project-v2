@@ -1,6 +1,5 @@
 import { makeAutoObservable, runInAction } from 'mobx'
 //
-import FetchProducts from '@/shared/store/products-api'
 import axios from 'axios'
 
 const API_URL = 'https://e646a0ef033b0e33.mokky.dev/brands'
@@ -42,7 +41,6 @@ class BrandStore {
       else {
         this.API_PAR = this.selectedBrands.map(b => `&brand[]=${b}`).join('')
       }
-      FetchProducts.getProducts()
     }
   
   }

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { makeAutoObservable } from 'mobx'
+import { makeAutoObservable, reaction } from 'mobx'
 //MOBX
 import BrandStore from './sort/brand/brand-store'
 import TypeStore from './sort/type/type-store'
@@ -19,6 +19,10 @@ class FetchProducts {
       makeAutoObservable(this, {
         API_URL: false
       })
+      reaction(() => [TypeStore.API_PAR, BrandStore.API_PAR,
+       SearchStore.API_PAR, PriceStore.API_PAR], () => {
+        this.getProducts()
+      }, { fireImmediately: true })
   }
   
   async getProducts(): Promise<void | Error> {
@@ -40,9 +44,8 @@ class FetchProducts {
     + SearchStore.API_PAR + PriceStore.API_PAR
   }
 
-  
   setLoading = (state: boolean) => this.loading = state
   setProducts = (data: IProduct[]) => this.products = data
 }
-  
+
   export default new FetchProducts()

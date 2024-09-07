@@ -4,7 +4,7 @@ import cl from './Products.module.scss'
 import TypeStore from '@/shared/store/sort/type/type-store';
 //COMPONENTS
 import { ProductList } from '@/widgets/lists/products/index'
-import { Filter } from '@/widgets/filter/index'
+import { Sort } from '@/widgets/filter/index'
 
 export const Products = () => {
 
@@ -14,7 +14,7 @@ export const Products = () => {
 
   return  (
     <>
-    <Filter />
+    <Sort />
     <div className={`${cl.products_main} jcc aic w100`}>
         <ProductList />
     </div>

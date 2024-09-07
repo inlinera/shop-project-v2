@@ -1,9 +1,16 @@
-.search_sort_menu {
+.sort_menu {
     position: relative;
-    width: 90vw;
-    margin: 5px auto;
-    padding: 10px;
-    display: grid;
-    justify-content: center;
-    align-items: center;
+    width: 100vw;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    input {
+        width: 100%;
+    }
+        .sort_menu_content {
+            margin: 5px auto;
+            padding: 10px;
+            justify-content: center;
+            align-items: center;
+        }
 }

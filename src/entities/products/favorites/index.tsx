@@ -19,7 +19,6 @@ export const FavoritesItem: FC<FavItemProps> = observer(({ item }) => {
 
     const useNavigationFunction = useNav()
 
-
   return (
     <ItemTemplate>
       <img src={item.pictures[0]} alt="product" onClick={() => useNavigationFunction(item.id)}/>

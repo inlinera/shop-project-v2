@@ -65,14 +65,20 @@ export const TheProduct: FC<TheProductProps> = observer(({ product }) => {
       <div className={cl.product}>
         <div className={cl.product_image}>
           {isLoading && <CircularProgress color="secondary" />}
+
           <button className={cl.hearticon} onClick={() => toggleClassBtn(product)}>
           <Heart color={isActive? 'red' : '#000'}/>
           </button>
-          <img src={currentImage} onLoad={handleImageLoad}
-            onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}
-            className={cl.product_image_preview} onClick={() => useNavigationFunction(id)}
-            loading='lazy' alt={name} />
+
+          <img src={currentImage}
+          className={cl.product_image_preview} 
+          onLoad={handleImageLoad}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          onClick={() => useNavigationFunction(id)}
+          loading='lazy' alt={name} />
         </div>
+        
         <div className={cl.product_info} onClick={() => useNavigationFunction(id)}>
           <p>{name}</p>
         </div>

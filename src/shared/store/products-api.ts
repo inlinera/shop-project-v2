@@ -48,4 +48,4 @@ class FetchProducts {
   setProducts = (data: IProduct[]) => this.products = data
 }
 
-  export default new FetchProducts()
+export default new FetchProducts()

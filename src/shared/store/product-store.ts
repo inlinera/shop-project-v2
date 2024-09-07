@@ -1,6 +1,9 @@
 import { makeAutoObservable, runInAction } from 'mobx'
 import axios from 'axios';
+//INTERFACES
 import { IProduct } from '../interfaces/IProduct'
+//DATA
+import { API_URL } from '../data/API_URL'
 
 class ProductStore {
   product: IProduct = {
@@ -21,7 +24,7 @@ class ProductStore {
  fetchProduct = async (id: number) => {
     this.isLoading = true
     try {
-      const { data } = await axios.get(`https://e646a0ef033b0e33.mokky.dev/products/${id}`)
+      const { data } = await axios.get(`${API_URL}/${id}`)
       runInAction(() => {
         this.product = data
         this.isLoading = false

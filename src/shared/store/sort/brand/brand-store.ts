@@ -1,8 +1,7 @@
 import { makeAutoObservable, runInAction } from 'mobx'
 //
 import axios from 'axios'
-
-const API_URL = 'https://e646a0ef033b0e33.mokky.dev/brands'
+import { BRAND_API_URL } from '@/shared/data/API_URL'
 
 interface BrandItem {
     brand: string
@@ -21,7 +20,7 @@ class BrandStore {
   
     async getBrands(): Promise<void>{
       try {
-        const { data } = await axios.get<BrandItem[]>(API_URL)
+        const { data } = await axios.get<BrandItem[]>(BRAND_API_URL)
         runInAction(() => {
           this.brands = data.map(item => item.brand)
           this.selectedBrands = [...this.brands]

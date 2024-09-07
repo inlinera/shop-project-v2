@@ -1,12 +1,12 @@
 import { Route, Routes } from 'react-router-dom'
 //COMPONENTS
-import { Layout } from '@/widgets/layout/Layout'
+import { Layout } from '@/widgets/layout/index'
 import { Products } from '@/pages/products/index'
 import { Cart } from '@/pages/cart/index'
 import { Favorites } from '@/pages/favorites/index'
 import { ProductPage } from '@/pages/product-info'
 
-function App() {
+export const App = () => {
 
   return (
    <div className='jcc aic tdnone'>
@@ -20,5 +20,3 @@ function App() {
    </div>
   )
 }
-
-export default App

@@ -1,11 +1,12 @@
 import {Link} from 'react-router-dom'
-import cl from './Layout.module.scss'
+import cl from './index.module.scss'
+import { observer } from 'mobx-react-lite'
 //MOBX
 import CartStore from '@/shared/store/cart-store'
 import FavoritesStore from '@/shared/store/favorites-store'
 //ICONS
-import { ShoppingCart, Heart } from 'lucide-react';
-import { observer } from 'mobx-react-lite';
+import { ShoppingCart, Heart } from 'lucide-react'
+
 
 export const Layout = observer(() => {
   const { cart } = CartStore
@@ -18,11 +19,11 @@ export const Layout = observer(() => {
       <Link to='/cart'>
         <button>
           <ShoppingCart size={'20px'}/>
-      <span>
-        {cart.length}
-      </span>
+          <span>
+            {cart.length}
+          </span>
         </button>
-    </Link>
+      </Link>
         <Link to='/favorites'>
         <button>
         <Heart size={'20px'}/>

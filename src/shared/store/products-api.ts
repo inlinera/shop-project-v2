@@ -7,13 +7,14 @@ import SearchStore from './sort/search/search-store'
 import PriceStore from './sort/price/price-store'
 //INTERFACES
 import { IProduct } from '../interfaces/IProduct'
-
+//DATA
+import { API_URL } from '../data/API_URL'
 
 class FetchProducts {
 
   products: IProduct[] = []
   loading = false
-  API_URL = 'https://e646a0ef033b0e33.mokky.dev/products?'
+  API_URL = `${API_URL}?`
   
   constructor() {
       makeAutoObservable(this, {

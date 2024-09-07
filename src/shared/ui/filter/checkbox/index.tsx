@@ -1,20 +1,22 @@
+import { FC, ReactNode } from "react"
 import { observer } from "mobx-react-lite"
-import React, { FC } from "react"
-
+import cl from './index.module.scss'
 
 interface FilterCheckboxProps {
     type: string
     checked?: boolean
     onChange?: () => void
     defaultChecked?: boolean
-    children: React.ReactNode | React.ReactChild
+    children: ReactNode
 }
 
-export const FilterCheckbox: FC<FilterCheckboxProps> = observer(({ type, checked, onChange, defaultChecked, children }) => {
+export const FilterCheckbox: FC<FilterCheckboxProps> = observer(({ 
+  type, checked, onChange, defaultChecked, children
+ }) => {
   return (
-    <label>
+    <label className={`${cl.checkBoxEl} flex aic`}>
       <input type={type} checked={checked} onChange={onChange} defaultChecked={defaultChecked}/>
-      {children}
+      <span>{children}</span>
     </label>
   )
 })

@@ -31,15 +31,16 @@ class BrandStore {
     }
   
     sortBrand = (brand: string) => {
-      this.selectedBrands = this.selectedBrands.includes(brand) 
+      const isBrandIncludes = this.selectedBrands.includes(brand) 
+
+      this.selectedBrands = isBrandIncludes
        ? this.selectedBrands.filter(b => b != brand) 
-        : [...this.selectedBrands, brand]
-      if (this.selectedBrands.length === this.brands.length) {
+       : [...this.selectedBrands, brand]
+
+      if (this.selectedBrands.length === this.brands.length) 
         this.API_PAR = ''
-      }
-      else {
+      else 
         this.API_PAR = this.selectedBrands.map(b => `&brand[]=${b}`).join('')
-      }
     }
   
   }

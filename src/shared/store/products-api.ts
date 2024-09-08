@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { makeAutoObservable, reaction } from 'mobx'
+import { fromPromise, IPromiseBasedObservable } from 'mobx-utils'
 //MOBX
 import BrandStore from './sort/brand/brand-store'
 import TypeStore from './sort/type/type-store'
@@ -12,8 +13,7 @@ import { API_URL } from '../data/API_URL'
 
 class FetchProducts {
 
-  products: IProduct[] = []
-  loading = false
+  products?: IPromiseBasedObservable<IProduct[]>
   API_URL = `${API_URL}?`
   
   constructor() {
@@ -25,28 +25,17 @@ class FetchProducts {
         this.getProducts()
       }, { fireImmediately: true })
   }
+
+  getProds = async () => (await axios.get<IProduct[]>(this.API_URL + this.getParams)).data
   
   async getProducts(): Promise<void | Error> {
-    this.setLoading(true)
-    try {
-        const { data } = await axios.get<IProduct[]>(this.API_URL + this.getParams)
-        this.setProducts(data)
-    } catch (error) {
-      console.error(`Error: ${error}`)
-      throw error
-    }
-    finally {
-      this.setLoading(false)
-    }
+     this.products = fromPromise( this.getProds() )
   }
 
   get getParams() {
     return TypeStore.API_PAR + BrandStore.API_PAR 
     + SearchStore.API_PAR + PriceStore.API_PAR
   }
-
-  setLoading = (state: boolean) => this.loading = state
-  setProducts = (data: IProduct[]) => this.products = data
 }
 
 export default new FetchProducts()

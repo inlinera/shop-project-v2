@@ -11,42 +11,42 @@ import { ProdButton } from '@/shared/ui/product-button'
 
 export const ProductPage = observer(() => {
     const { id } = useParams()
-    const { product, fetchProduct, isLoading, error } = ProductStore
+    const { product, fetchProduct } = ProductStore
     const { cart, toggleCart } = CartStore
     const [ imgId, setImgId ] = useState<number>(0)
 
     useEffect(() => {
-        if (id !== undefined) fetchProduct(Number(id))
+        if (id) fetchProduct(Number(id))
     }, [id])
 
-    if (isLoading) return <div>Loading...</div>
-    if (error) return <div>Error: {error}</div>
+    if (product?.state == 'pending') return <div>Loading...</div>
+    if (product?.state == 'rejected') return <div>Error, please try again later</div>
 
-    const isExistsCart = cart.some(p => p.id === product.id)
-
+    const isExistsCart = cart.some(p => p.id === product?.value.id)
 
   return (
+    product?.state == 'fulfilled' &&
     <>
     <Link to='/'>Back</Link>
     <div className={`${cl.product_item} jcc`}>
         <div className={cl.product_item__imgs}>
-            {product.pictures.map((p, id) => <button key={p} onClick={() => setImgId(id)}>
+            {product?.value.pictures?.map((p, id) => <button key={p} onClick={() => setImgId(id)}>
             <img src={p} alt={p}/>
             </button>
             )}
         </div>
         <div className={cl.product_item__info}>
             <div>
-                <img src={product.pictures[imgId]} alt="img" />
+                <img src={product?.value.pictures[imgId]} alt="img" />
             </div>
             <div>
-                <h3>{product.name}</h3>
-                <p>{product.brand}</p>
+                <h3>{product?.value.name}</h3>
+                <p>{product?.value.brand}</p>
             </div>
         </div>
         <div className={`${cl.product_item__cart} aic`}>
-        <p>Price: {product.price}$</p>
-            <ProdButton onClick={() => toggleCart(product)}>
+        <p>Price: {product?.value.price}$</p>
+            <ProdButton onClick={() => toggleCart(product?.value!)}>
                 {isExistsCart ? 'Remove from' : 'Add to'} cart
             </ProdButton>
         </div>

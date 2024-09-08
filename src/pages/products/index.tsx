@@ -9,13 +9,13 @@ import FetchProducts from '@/shared/store/products-api'
 
 export const Products = observer(() => {
 
-  const { products, loading } = FetchProducts
+  const { products } = FetchProducts
 
   return  (
     <>
     <Sort />
     <div className={`${cl.products_main} jcc aic w100`}>
-      {loading ? (
+      {products?.state == 'pending' ? (
       <div className="jcc"><CircularProgress /></div>
       )
       :
@@ -23,9 +23,18 @@ export const Products = observer(() => {
         <div className={cl.product_list}>
             <div className={`${cl.product_list_main} jcc aic`}>
             {
-            products.length ? products.map(p => <TheProduct product={p} key={p.id}/>) 
-            : <div className={`${cl.product_loader} jcc aic x-center`}>
+            products?.state == 'fulfilled' && products.value.length
+            ? 
+            products.value.map(p => <TheProduct product={p} key={p.id}/>) 
+            : 
+            <div className={`${cl.product_loader} jcc aic x-center`}>
             <p>Products not found</p>
+            </div>
+            }
+            {products?.state == 'rejected' 
+            &&
+            <div className={`${cl.product_loader} jcc aic x-center`}>
+            <p>Error, please try again later!</p>
             </div>
             }
             </div>

@@ -1,9 +1,5 @@
 import { useState } from 'react'
-import { observer } from 'mobx-react-lite'
 import cl from './index.module.scss'
-//MOBX
-import BrandStore from '@/shared/store/sort/brand/brand-store'
-import PriceStore from '@/shared/store/sort/price/price-store'
 //COMPONENTS
 import { FilterTemplate } from '@/shared/ui/filter/list/index'
 import { FilterItemTemplate } from '@/shared/ui/filter/item/index'
@@ -14,19 +10,14 @@ import { types } from '@/shared/data/types'
 //ICONS
 import { SlidersVertical } from 'lucide-react'
 
-export const Sort = observer(() => {
+export const Sort = () => {
   const [isModalActive, setIsModalActive] = useState(false)
-
-  const { brands, selectedBrands, sortBrand } = BrandStore
-  const { sortPrice, priceType } = PriceStore
 
   return (
     <div className={`${cl.sort_menu} aic`}>
       <div className={cl.sort_menu_content}>
 
-      <SortModal brands={brands} selectedBrands={selectedBrands}
-      sortBrand={sortBrand} sortPrice={sortPrice}
-      priceType={priceType} isModalActive={isModalActive}
+      <SortModal isModalActive={isModalActive}
       setIsModalActive={setIsModalActive}
       />
 
@@ -45,4 +36,4 @@ export const Sort = observer(() => {
       </div>
     </div>
   )
-})
+}

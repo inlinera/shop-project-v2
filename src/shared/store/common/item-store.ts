@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx'
-import { IProduct } from '../interfaces/IProduct'
+import { IProduct } from '../../interfaces/IProduct'
 
 class ToggleItem {
 

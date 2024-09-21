@@ -11,3 +11,14 @@
             align-items: center;
         }
 }
+
+@media (max-width: 800px) {
+    .sort_menu {
+        margin: 0 auto;
+        max-width: 90vw !important;
+        padding: 0 5px;
+        .sort_menu_content {
+            margin: 5px 0;
+        }
+    }
+}

@@ -5,11 +5,11 @@ import { TheProduct } from '@/entities/products/product'
 import { Sort } from '@/widgets/filter/index'
 import { CircularProgress } from '@mui/material'
 //MOBX
-import FetchProducts from '@/shared/store/products-api'
+import { fetchProducts } from '@/shared/store/products-api'
 
 export const Products = observer(() => {
 
-  const { products } = FetchProducts
+  const { products } = fetchProducts
 
   return  (
     <>
@@ -27,13 +27,13 @@ export const Products = observer(() => {
             ? 
             products.value.map(p => <TheProduct product={p} key={p.id}/>) 
             : 
-            <div className={`${cl.product_loader} jcc aic x-center`}>
+            <div className={`x-center`}>
             <p>Products not found</p>
             </div>
             }
             {products?.state == 'rejected' 
             &&
-            <div className={`${cl.product_loader} jcc aic x-center`}>
+            <div className={`x-center`}>
             <p>Error, please try again later!</p>
             </div>
             }

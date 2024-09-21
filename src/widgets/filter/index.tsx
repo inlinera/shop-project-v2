@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import cl from './index.module.scss'
+import { observer } from 'mobx-react-lite'
 //COMPONENTS
 import { FilterTemplate } from '@/shared/ui/filter/list/index'
 import { FilterItemTemplate } from '@/shared/ui/filter/item/index'
@@ -10,7 +11,8 @@ import { types } from '@/shared/data/types'
 //ICONS
 import { SlidersVertical } from 'lucide-react'
 
-export const Sort = () => {
+export const Sort = observer(() => {
+
   const [isModalActive, setIsModalActive] = useState(false)
 
   return (
@@ -36,4 +38,4 @@ export const Sort = () => {
       </div>
     </div>
   )
-}
+})

@@ -1,5 +1,5 @@
 import { makeAutoObservable, runInAction } from 'mobx'
-import ToggleItem from './item-store'
+import ToggleItem from './common/item-store'
 import { IProduct } from '../interfaces/IProduct'
 
 class FavoritesStore {
@@ -14,7 +14,7 @@ class FavoritesStore {
     toggleFavorites = (product: IProduct) => {
         runInAction(() => {
           ToggleItem.toggleItem(product, this.favorites)
-        localStorage.setItem('favorites-inl', JSON.stringify(this.favorites))
+          localStorage.setItem('favorites-inl', JSON.stringify(this.favorites))
         })
       }
 }

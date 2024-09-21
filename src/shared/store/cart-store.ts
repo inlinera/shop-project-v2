@@ -1,5 +1,5 @@
 import { makeAutoObservable, runInAction } from 'mobx'
-import ToggleItem from './item-store'
+import ToggleItem from './common/item-store'
 import { IProduct } from '../interfaces/IProduct'
 
 class CartStore {
@@ -14,7 +14,7 @@ class CartStore {
     toggleCart = (product: IProduct) => {
         runInAction(() => {
           ToggleItem.toggleItem(product, this.cart)
-        localStorage.setItem('cart-inl', JSON.stringify(this.cart))
+          localStorage.setItem('cart-inl', JSON.stringify(this.cart))
         })
       }
 }

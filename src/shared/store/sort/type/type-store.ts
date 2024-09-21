@@ -2,19 +2,20 @@ import { makeAutoObservable, runInAction } from "mobx"
 
 class TypeStore {
 
+  constructor() {
+    makeAutoObservable(this, {
+      defaultType: false
+    })
+  }
+
     defaultType = 'All Products'
     chosedType = 'All Products'
     API_PAR = ''
 
-    constructor() {
-        makeAutoObservable(this, {
-          defaultType: false
-        })
-    }
 
     changeType = (type: string) => {
-    this.chosedType = type
       runInAction(() => {
+      this.chosedType = type
         if (this.chosedType === this.defaultType) {
           this.API_PAR = ''
         } else {

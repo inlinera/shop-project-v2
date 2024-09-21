@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
 import cl from './index.module.scss'
 //MOBX
-import ProductStore from '@/shared/store/product-store'
+import { productStore } from '@/shared/store/product-store'
 import CartStore from '@/shared/store/cart-store'
 //COMPONENTS
 import { ProdButton } from '@/shared/ui/product-button'
@@ -11,7 +11,7 @@ import { ProdButton } from '@/shared/ui/product-button'
 
 export const ProductPage = observer(() => {
     const { id } = useParams()
-    const { product, fetchProduct } = ProductStore
+    const { product, fetchProduct } = productStore
     const { cart, toggleCart } = CartStore
     const [ imgId, setImgId ] = useState<number>(0)
 

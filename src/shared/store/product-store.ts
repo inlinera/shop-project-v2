@@ -3,12 +3,20 @@ import { fromPromise, IPromiseBasedObservable } from 'mobx-utils'
 import { IProduct } from '../interfaces/IProduct'
 //DATA
 import { API_URL } from '../data/API_URL'
-import { Api } from './common/api';
+
+import { Api } from './common/api'
+import { action, makeObservable, observable } from 'mobx'
+
+const productStoreProps = {
+  product: observable,
+  fetchProduct: action
+}
 
 class ProductStore extends Api {
 
   constructor() {
     super(API_URL)
+    makeObservable(this, productStoreProps)
   }
 
   product?: IPromiseBasedObservable<IProduct>

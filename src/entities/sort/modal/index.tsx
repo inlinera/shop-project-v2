@@ -16,40 +16,44 @@ interface SortModalProps {
 }
 
 export const SortModal = observer(({ ...props }: SortModalProps) => {
+  const { isModalActive, setIsModalActive } = props;
+  const { brands, selectedBrands, sortBrand } = BrandStore;
+  const { sortPrice, priceType } = PriceStore;
 
-    const { isModalActive, setIsModalActive } = props
-
-    const { brands, selectedBrands, sortBrand } = BrandStore
-    const { sortPrice, priceType } = PriceStore
-
-    //CHECK PRODUCT LOADING STATES
-    if (brands?.state == 'pending') return
-    if (brands?.state == 'rejected') alert('Error, please try again later')
 
   return (
-        <FilterModal isActive={isModalActive} setIsActive={setIsModalActive}>
-        <h2>Sort by brands</h2>
-        {
-        brands?.value?.map(
-          (brandItem: IBrandItem) => (
-            <FilterCheckbox
-              type='checkbox'
-              checked={selectedBrands?.includes(brandItem.brand as any)}
-              onChange={() => sortBrand(brandItem.brand as any)}
-              key={brandItem.brand}
-            >
-              <span>{brandItem.brand}</span>
-            </FilterCheckbox>
-          )
-        )
-        }
-        <h2>Sort by price</h2>
-        {prices.map(
-          p => <FilterCheckbox type='radio' key={p.name} checked={priceType === p.sort}
-        onChange={() => sortPrice(p.sort)} >
+    <FilterModal isActive={isModalActive} setIsActive={setIsModalActive}>
+      <h2>Sort by brands</h2>
+      {brands?.state == 'fulfilled' &&
+      brands?.value?.map((brandItem: IBrandItem) => (
+        <FilterCheckbox
+          type="checkbox"
+          checked={selectedBrands?.includes(brandItem.brand as any)}
+          onChange={() => sortBrand(brandItem.brand as any)}
+          key={brandItem.brand}
+        >
+          <span>{brandItem.brand}</span>
+        </FilterCheckbox>
+      ))
+      }
+      {
+      brands?.state == 'rejected' 
+      ? 'Error'
+      : brands?.state == 'pending' && 'Loading'
+      }
+
+      <h2>Sort by price</h2>
+      {prices.map((p) => (
+        <FilterCheckbox
+          type="radio"
+          key={p.name}
+          checked={priceType === p.sort}
+          onChange={() => sortPrice(p.sort)}
+        >
           <span>{p.name}</span>
-          </FilterCheckbox>
-        )}
-      </FilterModal>
+        </FilterCheckbox>
+      ))
+      }
+    </FilterModal>
   )
 })

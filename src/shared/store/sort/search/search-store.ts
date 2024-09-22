@@ -1,19 +1,19 @@
-import { makeAutoObservable, runInAction } from 'mobx'
+import { makeAutoObservable } from 'mobx'
 
 class SearchStore {
-  API_PAR = ''
-  value = ''
 
   constructor() {
     makeAutoObservable(this)
   }
+  //ALL SEARCH STATES
+  API_PAR = ''
+  value = ''
 
+  //ALL SEARCH ACTIONS
   sortSearch = (query: string) => {
-    runInAction(() => {
       this.API_PAR = this.value ? `&name=*${query}` : ''
-    })
   }
-
+  //ALL SEARCH STATE MOVES
   setValue = (value: string) => this.value = value
 }
 

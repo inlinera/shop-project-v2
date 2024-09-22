@@ -3,14 +3,16 @@ import ToggleItem from './common/item-store'
 import { IProduct } from '../interfaces/IProduct'
 
 class FavoritesStore {
+
+  constructor() {
+    const storedFavs = localStorage.getItem('favorites-inl')
+    this.favorites = storedFavs ? JSON.parse(storedFavs) : []
+    makeAutoObservable(this)
+  }
+  //ALL FAVORITES STATES
     favorites: IProduct[] = []
-
-    constructor() {
-        const storedFavs = localStorage.getItem('favorites-inl')
-        this.favorites = storedFavs ? JSON.parse(storedFavs) : []
-        makeAutoObservable(this)
-    }
-
+    
+  //ALL FAVORITES ACTIONS
     toggleFavorites = (product: IProduct) => {
         runInAction(() => {
           ToggleItem.toggleItem(product, this.favorites)

@@ -8,17 +8,18 @@ import CartStore from '@/shared/store/cart-store'
 //COMPONENTS
 import { ProdButton } from '@/shared/ui/product-button'
 
-
 export const ProductPage = observer(() => {
+
     const { id } = useParams()
     const { product, fetchProduct } = productStore
     const { cart, toggleCart } = CartStore
-    const [ imgId, setImgId ] = useState<number>(0)
+    const [ imgId, setImgId ] = useState(0)
 
     useEffect(() => {
-        if (id) fetchProduct(Number(id))
+        fetchProduct(Number(id))
     }, [id])
 
+    //CHECK PRODUCT LOADING STATES
     if (product?.state == 'pending') return <div>Loading...</div>
     if (product?.state == 'rejected') return <div>Error, please try again later</div>
 

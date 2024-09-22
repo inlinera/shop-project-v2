@@ -1,28 +1,38 @@
-import { makeAutoObservable } from 'mobx'
-//
-import axios from 'axios'
-import { BRAND_API_URL } from '@/shared/data/API_URL'
+import { action, makeObservable, observable } from 'mobx'
 import { fromPromise, IPromiseBasedObservable } from 'mobx-utils'
+//MOBX
+import { Api } from '../../common/api'
+//DATA
+import { BRAND_API_URL } from '@/shared/data/API_URL'
+//INTERFACES
 import { IBrandItem } from '@/shared/interfaces/IBrandItem'
 
+const BrandStoreProps = {
+  brands: observable,
+  selectedBrands: observable,
+  API_PAR: observable,
+  getBrandsAction: action,
+  sortBrand: action
+}
 
-class BrandStore {
 
+class BrandStore extends Api<IBrandItem[]> {
+  
+  constructor() {
+    super(`${BRAND_API_URL}?`)
+    makeObservable(this, BrandStoreProps)
+    this.getBrandsAction()
+  }
+  //ALL BRANDS STATES
     brands?: IPromiseBasedObservable<IBrandItem[]>
     selectedBrands: IBrandItem[] = []
     API_PAR = ''
-  
-    constructor() {
-      makeAutoObservable(this)
-      this.getBrandsAction()
+
+  //ALL BRANDS ACTIONS
+    getBrandsAction = async () => {
+      this.brands = fromPromise(this.get(''))
     }
 
-    getBrands = async () => (await axios.get<IBrandItem[]>(BRAND_API_URL)).data
-  
-    async getBrandsAction(): Promise<void> {
-      this.brands = fromPromise(this.getBrands())
-    }
-  
     sortBrand = (brand: IBrandItem) => {
       const isBrandIncludes = this.selectedBrands.includes(brand) 
 
@@ -30,11 +40,13 @@ class BrandStore {
        ? this.selectedBrands.filter(b => b != brand) 
        : [...this.selectedBrands, brand]
 
-      if (this.selectedBrands.length === (this.brands?.value as IBrandItem[])?.length 
-      || this.selectedBrands.length == 0) 
+      if (this.selectedBrands.length === (this.brands?.value as IBrandItem[])?.length ||
+       this.selectedBrands.length == 0) {
         this.API_PAR = ''
-      else 
+      }
+      else {
         this.API_PAR = this.selectedBrands.map(b => `&brand[]=${b}`).join('')
+      }
     }
 }
 

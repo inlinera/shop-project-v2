@@ -16,7 +16,9 @@ export const Products = observer(() => {
     <Sort />
     <div className={`${cl.products_main} jcc aic w100`}>
       {products?.state == 'pending' ? (
-      <div className="jcc"><CircularProgress /></div>
+      <div className="jcc">
+        <CircularProgress />
+      </div>
       )
       :
       (

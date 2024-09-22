@@ -28,18 +28,16 @@ export const TheProduct: FC<TheProductProps> = observer(({ product }) => {
     const { cart, toggleCart } = CartStore
     const { favorites, toggleFavorites } = FavoritesStore
 
-    const [isActive, setIsActive] = useState<boolean>(false)
+    const [isActive, setIsActive] = useState(false)
     const [currentImage, setCurrentImage] = useState<string>(pictures?.[0])
-    const [isLoading, setIsLoading] = useState<boolean>(true)
-  
+    const [isLoading, setIsLoading] = useState(true)
+
     const handleImageLoad = useCallback(() => setIsLoading(false), [])
-    
+
     const handleMouseEnter = useCallback(() => useMouseEnter({
        pictures, setIsLoading, setCurrentImage 
-      }),
-      [pictures]
-    )
-  
+      }), [pictures])
+
     const handleMouseLeave = useCallback(() => {
       setIsLoading(false);
       setCurrentImage(pictures?.[0])
@@ -51,7 +49,7 @@ export const TheProduct: FC<TheProductProps> = observer(({ product }) => {
     const isExistsFavs = favorites.some(p => p.id === product.id)
 
     useEffect(() => {
-      setIsActive(prevState => prevState !== isExistsFavs ? isExistsFavs : prevState)
+      setIsActive(isExistsFavs)
     }, [isExistsFavs])
 
     return (
@@ -81,7 +79,7 @@ export const TheProduct: FC<TheProductProps> = observer(({ product }) => {
             <ShoppingBasket size={'23px'} />
             <span>
               { isExistsCart ? 'Remove from' : 'Add to' } cart
-              </span>
+            </span>
           </ProdButton>
         </div>
       </div>

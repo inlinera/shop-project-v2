@@ -15,7 +15,6 @@ const BrandStoreProps = {
   sortBrand: action
 }
 
-
 class BrandStore extends Api<IBrandItem[]> {
   
   constructor() {
@@ -29,9 +28,7 @@ class BrandStore extends Api<IBrandItem[]> {
     API_PAR = ''
 
   //ALL BRANDS ACTIONS
-    getBrandsAction = async () => {
-      this.brands = fromPromise(this.get(''))
-    }
+    getBrandsAction = async () => this.brands = fromPromise(this.get())
 
     sortBrand = (brand: IBrandItem) => {
       const isBrandIncludes = this.selectedBrands.includes(brand) 

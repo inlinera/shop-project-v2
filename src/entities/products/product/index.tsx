@@ -32,16 +32,14 @@ export const TheProduct: FC<TheProductProps> = observer(({ product }) => {
     const [currentImage, setCurrentImage] = useState<string>(pictures?.[0])
     const [isLoading, setIsLoading] = useState(true)
 
-    const handleImageLoad = useCallback(() => setIsLoading(false), [])
-
     const handleMouseEnter = useCallback(() => useMouseEnter({
        pictures, setIsLoading, setCurrentImage 
-      }), [pictures])
+      }), [])
 
     const handleMouseLeave = useCallback(() => {
-      setIsLoading(false);
+      setIsLoading(false)
       setCurrentImage(pictures?.[0])
-    }, [pictures])
+    }, [])
 
     const toggleClassBtn = (product: IProduct) => toggleFavorites(product)
 
@@ -55,33 +53,50 @@ export const TheProduct: FC<TheProductProps> = observer(({ product }) => {
     return (
       <div className={cl.product}>
         <div className={cl.product_image}>
-          {isLoading && <CircularProgress color="secondary" />}
+          {
+          isLoading && <CircularProgress
+          color="secondary"
+          />
+          }
 
-          <button className={cl.hearticon} onClick={() => toggleClassBtn(product)}>
-          <Heart color={isActive? 'red' : '#000'}/>
+          <button
+          className={cl.hearticon}
+          onClick={() => toggleClassBtn(product)}
+          >
+          <Heart
+          color={isActive? 'red' : '#000'}
+          />
           </button>
 
-          <img src={currentImage}
+          <img
+          src={currentImage}
           className={cl.product_image_preview} 
-          onLoad={handleImageLoad}
+          onLoad={() => setIsLoading(false)}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
           onClick={() => useNavigationFunction(id)}
-          loading='lazy' alt={name} />
+          loading='lazy'
+          alt={name} 
+          />
         </div>
         
-        <div className={cl.product_info} onClick={() => useNavigationFunction(id)}>
+        <div
+        className={cl.product_info}
+        onClick={() => useNavigationFunction(id)}
+        >
           <p>{name}</p>
         </div>
         <div className={`${cl.product_cart} aic jcc`}>
         <span>{price}$</span>
           <ProdButton onClick={() => toggleCart(product)}>
-            <ShoppingBasket size={'23px'} />
+            <ShoppingBasket
+            size={'23px'}
+            />
             <span>
               { isExistsCart ? 'Remove from' : 'Add to' } cart
             </span>
           </ProdButton>
         </div>
       </div>
-    );
+    )
   })

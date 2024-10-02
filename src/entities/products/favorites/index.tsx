@@ -21,10 +21,18 @@ export const FavoritesItem: FC<FavItemProps> = observer(({ item }) => {
 
   return (
     <ItemTemplate>
-      <img src={item.pictures[0]} alt="product" onClick={() => useNavigationFunction(item.id)}/>
-      <p onClick={() => useNavigationFunction(item.id)}>{item.name}</p>
+      <img
+      src={item.pictures[0]}
+      alt="product"
+      onClick={() => useNavigationFunction(item.id)}
+      />
+      <p onClick={() => useNavigationFunction(item.id)}>
+        {item.name}
+      </p>
       <span>{item.price}</span>
-      <button onClick={() => toggleFavorites(item)}>Delete</button>
+      <button onClick={() => toggleFavorites(item)}>
+        Delete
+      </button>
     </ItemTemplate>
   )
 })

@@ -3,9 +3,7 @@ import { IProduct } from '../../interfaces/IProduct'
 
 class ToggleItem {
 
-    constructor() {
-        makeAutoObservable(this)
-    }
+    constructor() { makeAutoObservable(this) }
 
     toggleItem = (item: IProduct, array: IProduct[]) => {
         const index = array.findIndex(i => i.id === item.id)

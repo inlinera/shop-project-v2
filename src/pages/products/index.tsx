@@ -33,7 +33,8 @@ export const Products = observer(() => {
             <p>Products not found</p>
             </div>
             }
-            {products?.state == 'rejected' 
+            {
+            products?.state == 'rejected' 
             &&
             <div className={`x-center`}>
             <p>Error, please try again later!</p>

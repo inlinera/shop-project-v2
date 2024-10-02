@@ -6,14 +6,12 @@ import TypeStore from '../sort/type/type-store'
 import SearchStore from '../sort/search/search-store'
 import PriceStore from '../sort/price/price-store'
 
-const apiProps = {
-    get: action
-}
-
 export class Api<T> {
 
     constructor (path: string) {
-        makeObservable(this, apiProps)
+        makeObservable(this, {
+            get: action
+        })
         this.path = path
     }
 
@@ -22,6 +20,9 @@ export class Api<T> {
 
     //ALL API ACTIONS
     get = async (params?: string | number) => {
+        if (!params) {
+            return (await axios.get<T>(`${this.path}`)).data
+        }
         return (await axios.get<T>(`${this.path}${params}`)).data
     }
     //PARAMS GETTER

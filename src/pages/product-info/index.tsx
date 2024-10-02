@@ -1,19 +1,19 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
 import cl from './index.module.scss'
 //MOBX
-import { productStore } from '@/shared/store/product-store'
+import { productStore } from '@/shared/store/product-api'
 import CartStore from '@/shared/store/cart-store'
 //COMPONENTS
 import { ProdButton } from '@/shared/ui/product-button'
+import Carousel from 'react-material-ui-carousel'
 
 export const ProductPage = observer(() => {
 
     const { id } = useParams()
     const { product, fetchProduct } = productStore
     const { cart, toggleCart } = CartStore
-    const [ imgId, setImgId ] = useState(0)
 
     useEffect(() => {
         fetchProduct(Number(id))
@@ -30,15 +30,13 @@ export const ProductPage = observer(() => {
     <>
     <Link to='/'>Back</Link>
     <div className={`${cl.product_item} jcc`}>
-        <div className={cl.product_item__imgs}>
-            {product?.value.pictures?.map((p, id) => <button key={p} onClick={() => setImgId(id)}>
-            <img src={p} alt={p}/>
-            </button>
-            )}
-        </div>
         <div className={cl.product_item__info}>
-            <div>
-                <img src={product?.value.pictures[imgId]} alt="img" />
+            <div className='grid jcc aic'>
+                <Carousel
+                navButtonsAlwaysVisible
+                >
+                    {product?.value.pictures.map(i => <img src={i} alt={i} key={i} />)}
+                </Carousel>
             </div>
             <div>
                 <h3>{product?.value.name}</h3>
@@ -47,7 +45,7 @@ export const ProductPage = observer(() => {
         </div>
         <div className={`${cl.product_item__cart} aic`}>
         <p>Price: {product?.value.price}$</p>
-            <ProdButton onClick={() => toggleCart(product?.value!)}>
+            <ProdButton onClick={() => toggleCart(product?.value)}>
                 {isExistsCart ? 'Remove from' : 'Add to'} cart
             </ProdButton>
         </div>

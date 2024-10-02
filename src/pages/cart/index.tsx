@@ -15,7 +15,9 @@ export const Cart = observer(() => {
   return (
     <div className="cb">
         <Link to='/'>Back</Link>
-        <Suspense fallback={<CircularProgress color="secondary" />}>
+        <Suspense
+        fallback={<CircularProgress color="secondary" />}
+        >
         <ListTemplate>
           {!cart.length && 'Items not found'}
           {cart?.map(e => <CartItem item={e} key={e.id}/>)}

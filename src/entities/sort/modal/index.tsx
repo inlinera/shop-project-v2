@@ -16,13 +16,15 @@ interface SortModalProps {
 }
 
 export const SortModal = observer(({ ...props }: SortModalProps) => {
-  const { isModalActive, setIsModalActive } = props;
-  const { brands, selectedBrands, sortBrand } = BrandStore;
-  const { sortPrice, priceType } = PriceStore;
 
+  const { isModalActive, setIsModalActive } = props
+  const { brands, selectedBrands, sortBrand } = BrandStore
+  const { sortPrice, priceType } = PriceStore
 
   return (
-    <FilterModal isActive={isModalActive} setIsActive={setIsModalActive}>
+    <FilterModal
+    isActive={isModalActive}
+    setIsActive={setIsModalActive}>
       <h2>Sort by brands</h2>
       {brands?.state == 'fulfilled' &&
       brands?.value?.map((brandItem: IBrandItem) => (

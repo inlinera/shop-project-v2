@@ -18,22 +18,30 @@ export const Sort = observer(() => {
   return (
     <div className={`${cl.sort_menu} aic`}>
       <div className={cl.sort_menu_content}>
-
-      <SortModal isModalActive={isModalActive}
+      <SortModal
+      isModalActive={isModalActive}
       setIsModalActive={setIsModalActive}
       />
-
-      <SearchTemplate placeholder='Search the product'/>
-
+      <SearchTemplate 
+      placeholder='Search the product'
+      />
         <FilterTemplate>
-          <FilterItemTemplate onModalClick={() => setIsModalActive(true)}>
-          <SlidersVertical size={'18'}/>
+          <FilterItemTemplate 
+          onModalClick={() => setIsModalActive(true)}
+          >
+          <SlidersVertical
+          size={'18'}
+          />
           </FilterItemTemplate>
-            {types?.map(t => 
-          <FilterItemTemplate key={t.name} typeInfo={t.name}>
-                {t.name}
+
+          {types?.map(t => 
+            <FilterItemTemplate
+            key={t.name}
+            typeInfo={t.name}
+            >
+              {t.name}
             </FilterItemTemplate>
-            )}
+          )}
         </FilterTemplate>
       </div>
     </div>

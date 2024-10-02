@@ -15,7 +15,9 @@ export const Favorites = observer(() => {
   return (
     <div className="cb">
         <Link to='/'>Back</Link>
-        <Suspense fallback={<CircularProgress color="secondary"/>}>
+        <Suspense
+        fallback={<CircularProgress color="secondary"/>}
+        >
         <ListTemplate>
           {!favorites.length && 'Items not found'}
           {favorites?.map(e => <FavoritesItem item={e} key={e.id}/>)}

@@ -21,8 +21,14 @@ export const CartItem: FC<CartItemProps> = observer(({ item }) => {
 
   return (
     <ItemTemplate>
-      <img src={item.pictures[0]} alt="product" onClick={() => useNavigationFunction(item.id)}/>
-      <p onClick={() => useNavigationFunction(item.id)}>{item.name}</p>
+      <img
+      src={item.pictures[0]}
+      alt="product"
+      onClick={() => useNavigationFunction(item.id)}
+      />
+      <p onClick={() => useNavigationFunction(item.id)}>
+        {item.name}
+      </p>
       <span>{item.price}</span>
       <button onClick={() => toggleCart(item)}>
         Delete

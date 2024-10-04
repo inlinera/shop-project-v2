@@ -20,7 +20,7 @@ class ProductStore extends Api<IProduct> {
   }
   //ALL PRODUCT STATES
   product?: IPromiseBasedObservable<IProduct>
-  
+
   //ALL PRODUCT ACTIONS
   fetchProduct = async (id: number) => this.product = fromPromise(this.get(id))
 }
